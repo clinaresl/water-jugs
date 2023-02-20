@@ -53,6 +53,14 @@ class JUGParser(object):
                               type=int,
                               default=5,
                               help="capacity of the larger jug. By default, 5 gallons")
+        optional.add_argument('-0', '--small_initial',
+                              type=int,
+                              default=0,
+                              help="initial amount of water in the smaller jug. By default, 0 gallons")
+        optional.add_argument('-1', '--large_initial',
+                              type=int,
+                              default=0,
+                              help="initial amount of water in the larger jug. By default, 0 gallons")
 
         # Miscellaneous arguments
         # ---------------------------------------------------------------------

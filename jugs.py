@@ -22,6 +22,7 @@ import jugstate
 # error messages
 # -----------------------------------------------------------------------------
 CRITICAL_WRONG_MAX_VOLUME = "Maximum capacity has to be given as a strictly positive number"
+CRITICAL_WRONG_INITIAL_VOLUMNE = "The initial volume of both jugs should be less or equal than its maximum capacity"
 
 # main
 # -----------------------------------------------------------------------------
@@ -41,8 +42,12 @@ def main():
             raise ValueError(CRITICAL_WRONG_MAX_VOLUME)
         jugstate.JUGState._larger_capacity = params.large
 
-    # create the initial state - in the initial state, both jugs are empty
-    start = jugstate.JUGState(0, 0)
+    # create the initial state - in the initial state, both jugs are empty by
+    # default but maybe the user came out with a different idea ;)
+    if params.small_initial > jugstate.JUGState._smaller_capacity or \
+       params.large_initial > jugstate.JUGState._larger_capacity:
+        raise ValueError(CRITICAL_WRONG_INITIAL_VOLUME)
+    start = jugstate.JUGState(params.small_initial, params.large_initial)
 
     # invoke the selected search algorithm
     solution = {
