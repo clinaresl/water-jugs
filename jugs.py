@@ -14,6 +14,7 @@
 
 # imports
 # -----------------------------------------------------------------------------
+import jugbfs
 import jugdfs
 import jugparser
 import jugstate
@@ -44,7 +45,11 @@ def main():
     start = jugstate.JUGState(0, 0)
 
     # invoke the selected search algorithm
-    solution = jugdfs.JUGDFS(start).solve()
+    solution = {
+        "depth-first": jugdfs.JUGDFS(start).solve(),
+        "breadth-first": jugbfs.JUGBFS(start).solve()
+    }[params.algorithm]
+
     print(solution)
 
 

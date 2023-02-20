@@ -69,14 +69,17 @@ class JUGDFS(object):
         # time, the path shall be empty indeed. This provides a clear interface
         # to third-party users
 
+        # importantly, depth-first search is generally invoked with a max_depth
+        # parameter which bounds the maximum depth ---otherwise, the algorithm
+        # might fall into an infinite loop. This is not necessary here, however,
+        # since the underlying graph state is finite
+
         # first and foremost, if no state has been given then start with the
         # start state given to the constructor. Type verification skipped ...
         curr_state = state if state else self._start
 
         # base case - the current state is the goal state
         if curr_state.is_goal():
-
-            print("Solution found!")
 
             # Yeah, solution found!!!! Build a solution from the path built
             return jugsolution.JUGSolution(path)

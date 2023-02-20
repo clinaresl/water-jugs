@@ -58,6 +58,21 @@ class JUGState(object):
         # initialize the data members of this class
         self._smaller, self._larger = smaller, larger
 
+        # some algorithms might require the state to store the path from the
+        # start state to it. Initialize a data member to store this information
+        # in case it is needed
+        self._path = []
+
+
+    def __add__(self, other):
+        """add an instance of JUGState to this one, thus growing the path"""
+
+        # append the new state to the path. Type verification skipped ...
+        self._path.append(other)
+
+        # and return this instance
+        return self
+
     def __eq__(self, other) -> bool:
         """return True if and only if this instance is strictly equal to other"""
 
@@ -76,7 +91,20 @@ class JUGState(object):
     def __str__(self) -> str:
         """return a string representation of this instance"""
 
-        return "({0}, {1})".format(self._smaller, self._larger)
+        output = "({0}, {1})".format(self._smaller, self._larger)
+
+        # in case this instance contains a path, show it also
+        if len(self._path) > 0:
+
+            output += " [({0}, {1})".format(self._path[0]._smaller,
+                                            self._path[0]._larger)
+            for istate in range(1, len(self._path)):
+                output += " -- ({0}, {1})".format(self._path[istate]._smaller, \
+                                                  self._path[istate]._larger)
+            output += "]"
+
+        # and return the string representation
+        return output
 
     def children(self) -> list:
         """return a list with all children of this instance, i.e., instances
@@ -146,10 +174,24 @@ class JUGState(object):
 
         return self._larger
 
+    def get_path(self) -> list:
+        """return the path from the start state to this one"""
+
+        return self._path
+
     def is_goal(self) -> bool:
         """return True if and only if this instance is a goal state"""
 
         return self._smaller == 4 or self._larger == 4
+
+
+    def set_path(self, path: list):
+        """set the path from the start state to this one as a list of instances
+           of JUGState
+
+        """
+
+        self._path = path
 
 
 # Local Variables:
