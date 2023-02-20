@@ -94,8 +94,9 @@ class JUGDFS(object):
         for child in children:
 
             # skip those cases where this child was already explored in the
-            # current path
-            if child in path:
+            # current path. Note the start state is not included in the path and
+            # therefore equality is checked separately
+            if child in path or child == self._start:
                 continue
 
             # recursively invoke this method over this child
