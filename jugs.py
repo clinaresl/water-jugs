@@ -49,13 +49,23 @@ def main():
         raise ValueError(CRITICAL_WRONG_INITIAL_VOLUME)
     start = jugstate.JUGState(params.small_initial, params.large_initial)
 
+    # make sure to use the target volume specified by the user. By default it is
+    # 4 but, who knows? Note, in particular, it is allowed to use impossible
+    # values such as a target which is strictly larger than the maximum capacity
+    # of any jug. That should not be problem and any algorithm ends with no
+    # solution found
+    jugstate.JUGState._target_volume = params.target
+
     # invoke the selected search algorithm
     solution = {
         "depth-first": jugdfs.JUGDFS(start).solve(),
         "breadth-first": jugbfs.JUGBFS(start).solve()
     }[params.algorithm]
 
-    print(solution)
+    if solution is None:
+        print(" No solution found!")
+    else:
+        print(solution)
 
 
 # -----------------------------------------------------------------------------

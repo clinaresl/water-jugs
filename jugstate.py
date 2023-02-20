@@ -35,10 +35,15 @@ class JUGState(object):
     # static attributes
     #
     # all instances of this class refer to different occupations of both water
-    # jugs. Their capacity is therefore an invariant and can be stored as a
-    # static attribute to be shared by all instances
+    # jugs. Their maximum capacity is therefore an invariant and can be stored
+    # as a static attribute to be shared by all instances
     _smaller_capacity = 3
     _larger_capacity = 5
+
+    # also, the target volume of water to get in one of the jugs is an invariant
+    # (ie., no operator modifies this) and thus it can be also shared among all
+    # instances
+    _target_volume = 4
 
     def __init__(self, smaller: int, larger: int):
         """A state is initialized explicitly specifying the volume used in the
@@ -182,7 +187,8 @@ class JUGState(object):
     def is_goal(self) -> bool:
         """return True if and only if this instance is a goal state"""
 
-        return self._smaller == 4 or self._larger == 4
+        return self._smaller == JUGState._target_volume or \
+            self._larger == JUGState._target_volume
 
 
     def set_path(self, path: list):
