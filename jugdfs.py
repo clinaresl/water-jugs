@@ -82,7 +82,11 @@ class JUGDFS(object):
         if curr_state.is_goal():
 
             # Yeah, solution found!!!! Build a solution from the path built
-            return jugsolution.JUGSolution(path)
+            # explicitly adding the start state. This is necessary because
+            # originally the list is by default empty but it would be nice to
+            # show the start state as well
+            return jugsolution.JUGSolution([jugstate.JUGState(self._start.get_smaller(),
+                                                              self._start.get_larger())] + path)
 
         # general case - expand this node and employ tail recursion to explore
         # the children
