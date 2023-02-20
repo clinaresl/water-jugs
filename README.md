@@ -6,7 +6,7 @@ namely *depth-first* and *breadth-first* search
 In [Die Hard III](https://www.youtube.com/watch?v=2vdF6NASMiE) the bad guy
 threatens to explode a bomb if the *water jugs* problem is not solved. In the
 movie, there are two jugs, with a maximum capacity of 3 and 5 gallons each. Both
-are initial empty and the goal is to find a sequence of operations that leaves
+are initially empty and the goal is to find a sequence of operations that leaves
 exactly four gallons of water in one of the jugs (obviously, in the larger one,
 since the smaller could not accomodate a volume larger than its maximum
 capacity). The only allowed operations are either to empty a jug, to fill it up
@@ -21,8 +21,8 @@ still two jugs, so maybe future bad guys create other instances with more jugs!
 
 # Usage #
 
-`jugs` has only one mandatory argument, `--algorithm`. Choices are *depth-first*
-or *breadth-first*. Other arguments serve to the purpose of posing different
+`jugs` has only one mandatory argument, `--algorithm`. Choices are `depth-first`
+or `breadth-first`. Other arguments serve to the purpose of posing different
 variants and are optional:
 
 * `--small`, `--large`: set the maximum capacity of either the small or large
@@ -54,7 +54,7 @@ using *depth-first* search. To use *breadth-first* search:
 which produces a solution path no larger than the solution found with
 *depth-first*. The reason is that *breadth-first* search produces optimal
 solutions in this domain because the cost of each operator is the same,
-cannonically equal to one, so that there solutions at depth *d* have a cost
+cannonically equal to one, so that solutions at depth *d* have a cost precisely
 equal to *d* indeed.
 
 The effect of *depth-first* search finding ridiculously long sequences becomes
@@ -64,7 +64,8 @@ gallons originally. Compare the solutions found:
 
 ``` sh
     $ ./jugs.py --algorithm depth-first --small_initial 1 --large_initial 3 
-    (1, 3) -- (0, 3) -- (0, 0) -- (3, 0) -- (3, 5) -- (0, 5) -- (3, 2) -- (0, 2) -- (2, 0) -- (2, 5) -- (3, 4)
+    (1, 3) -- (0, 3) -- (0, 0) -- (3, 0) -- (3, 5) -- (0, 5) -- (3, 2) -- (0, 2) -- 
+    (2, 0) -- (2, 5) -- (3, 4)
     Elapsed time: 0.001 seconds
     
     $ ./jugs.py --algorithm breadth-first --small_initial 1 --large_initial 3 
@@ -82,11 +83,13 @@ modified ---note the target volume is larger than the maximum capacity of any
 jug and thus the instance is unsolvable, yet both algorithms detect this case:
 
 ``` sh
-    $ ./jugs.py --algorithm depth-first --small 10 --large 16 --small_initial 1 --large_initial 3 --target 20  
+    $ ./jugs.py --algorithm depth-first --small 10 --large 16 --small_initial 1 --large_initial 3 
+                --target 20  
     No solution found!
     Elapsed time: 4.632 seconds
     
-    $ ./jugs.py --algorithm breadth-first --small 10 --large 16 --small_initial 1 --large_initial 3 --target 20  
+    $ ./jugs.py --algorithm breadth-first --small 10 --large 16 --small_initial 1 --large_initial 3 
+                --target 20  
     No solution found!
     Elapsed time: 4.675 seconds
 
