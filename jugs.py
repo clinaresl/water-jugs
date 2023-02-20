@@ -14,6 +14,8 @@
 
 # imports
 # -----------------------------------------------------------------------------
+import time
+
 import jugbfs
 import jugdfs
 import jugparser
@@ -57,15 +59,19 @@ def main():
     jugstate.JUGState._target_volume = params.target
 
     # invoke the selected search algorithm
+    st = time.time()
     solution = {
         "depth-first": jugdfs.JUGDFS(start).solve(),
         "breadth-first": jugbfs.JUGBFS(start).solve()
     }[params.algorithm]
+    et = time.time()
 
     if solution is None:
         print(" No solution found!")
     else:
         print(solution)
+
+    print("Elapsed time: {:.3f} seconds".format(et - st))
 
 
 # -----------------------------------------------------------------------------
