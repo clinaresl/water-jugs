@@ -22,13 +22,13 @@ still two jugs, so maybe future bad guys create other instances with more jugs!
 # Installation #
 
 `jugs` is provided *as is*. Thus, it has not been configured to be used with any
-package installer. To give it try, just simply clone this repo with:
+package installer. To give it a try, just simply clone this repo with:
 
 ``` sh
     $ git clone https://github.com/clinaresl/water-jugs
 ```
 
-Next, go to the directory `water-jugs` and try any of the [examples](#examples)
+Next, go to the directory `water-jugs/` and try any of the [examples](#examples)
 provided below.
 
 # Usage #
